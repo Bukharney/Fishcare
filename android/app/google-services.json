@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "517887023342",
+    "firebase_url": "https://fishcare-6a320-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "fishcare-6a320",
+    "storage_bucket": "fishcare-6a320.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517887023342:android:921940e7bf1395086d7bff",
+        "android_client_info": {
+          "package_name": "com.test.fish_care"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517887023342-9mbdrt53fftgc2i8bebnepkjk5jdbi6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-aVpUXs-LKuSKGfNob-xY1zGcldQFBsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517887023342-9mbdrt53fftgc2i8bebnepkjk5jdbi6v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "517887023342-3tom7dvlpppt16pmles4fqf7hbramcc5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.test.fishCare"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
