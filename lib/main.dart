@@ -3,9 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fish_care/constants/routes.dart';
 import 'package:fish_care/services/auth/auth_service.dart';
 import 'package:fish_care/views/login_view.dart';
-import 'package:fish_care/views/notes_view.dart';
+import 'package:fish_care/views/main_view.dart';
 import 'package:fish_care/views/register_view.dart';
-import 'package:fish_care/views/test.dart';
+import 'package:fish_care/views/display_view.dart';
 import 'package:fish_care/views/verify_email.view.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ void main() {
       registerRoute: (context) => RegisterView(),
       noteRoute: (context) => NotesView(),
       verifyEmailRoute: (context) => VerifyEmailView(),
-      testRoute: (context) => Test(),
+      testRoute: (context) => DisplayView(),
     },
   ));
 }
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
             } else {
               return LoginView();
             }
-            return Test();
+            return NotesView();
           default:
             return CircularProgressIndicator();
         }

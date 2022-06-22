@@ -14,8 +14,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  late final TextEditingController _email;
-  late final TextEditingController _password;
+  late TextEditingController _email;
+  late TextEditingController _password;
 
   @override
   void initState() {
@@ -189,7 +189,7 @@ class _LoginViewState extends State<LoginView> {
                         final user = AuhtService.firebase().currentUser;
                         if (user?.isEmailVerified ?? false) {
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                            noteRoute,
+                            testRoute,
                             (route) => false,
                           );
                         } else {
