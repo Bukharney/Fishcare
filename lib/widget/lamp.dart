@@ -1,138 +1,204 @@
-import 'package:firebase_database/firebase_database.dart';
-import 'package:fish_care/utilities/show_error_dialog.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
 class Lamp extends StatefulWidget {
-  final List lamp;
-  const Lamp({Key? key, required this.lamp}) : super(key: key);
+  const Lamp({Key? key}) : super(key: key);
 
   @override
-  State<Lamp> createState() => _LampState(lamp);
+  State<Lamp> createState() => _LampState();
 }
 
 class _LampState extends State<Lamp> {
-  List lamp;
-  _LampState(this.lamp);
-  late TimeOfDay timeOn;
-  late TimeOfDay timeOff;
-  final initialTime = TimeOfDay.now();
-  final _database = FirebaseDatabase.instance.ref();
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(1.0),
-      width: 330,
-      height: 100,
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(16)),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: EdgeInsets.all(8.0),
+          width: 160,
+          height: 120,
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(16)),
+          child: Column(
             children: [
-              const SizedBox(
+              Text(
+                name[0],
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
                 height: 10,
               ),
-              Container(
-                padding: const EdgeInsets.all(8.0),
-                width: 120,
-                height: 70,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('Lamp',
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold)),
-                  ],
-                ),
+              ToggleSwitch(
+                changeOnTap: false,
+                animationDuration: 300,
+                minWidth: 60,
+                minHeight: 40.0,
+                initialLabelIndex: db[0],
+                cornerRadius: 20.0,
+                activeFgColor: Colors.white,
+                inactiveBgColor: Colors.grey,
+                inactiveFgColor: Colors.white,
+                icons: const [
+                  Icons.lightbulb_outline,
+                  Icons.lightbulb,
+                ],
+                totalSwitches: 2,
+                iconSize: 30.0,
+                activeBgColors: const [
+                  [Colors.black45, Colors.black26],
+                  [Colors.yellow, Colors.orange]
+                ],
+                animate: true,
+                curve: Curves.bounceInOut,
+                onToggle: (value) async {
+                  try {
+                    if (db[2] == 1) {
+                      context.read<LoadingProvider>().setLoad(true);
+                      await wdb.update({name[0]: value});
+                      context.read<LoadingProvider>().setLoad(false);
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: 'Please select manual mode!',
+                          gravity: ToastGravity.CENTER);
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
+                },
               ),
-              const SizedBox(
-                width: 2,
+              SizedBox(
+                height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text('ON',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final newTime = await showTimePicker(
-                          context: context,
-                          initialTime: initialTime,
-                        );
-                        if (newTime == null) {
-                          return;
-                        }
-                        setState(() {
-                          timeOn = newTime;
-                        });
-                        try {
-                          await _database
-                              .update({'data/lamp/onH/': timeOn.hour});
-                          await _database
-                              .update({'data/lamp/onM/': timeOn.minute});
-                        } catch (e) {
-                          showErrorDialog(context, e.toString());
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.lightGreen,
-                          minimumSize: const Size(75, 35)),
-                      child: Text(
-                          '${lamp[0].toString().padLeft(2, '0')} : ${lamp[1].toString().padLeft(2, '0')}'),
-                    ),
-                  ],
-                ),
+              ToggleSwitch(
+                changeOnTap: false,
+                animationDuration: 300,
+                radiusStyle: true,
+                minWidth: 60,
+                minHeight: 20.0,
+                initialLabelIndex: db[2],
+                cornerRadius: 20.0,
+                activeFgColor: Colors.white,
+                inactiveBgColor: Colors.grey,
+                inactiveFgColor: Colors.white,
+                activeBgColors: const [
+                  [Colors.green, Colors.amberAccent],
+                  [Colors.green, Colors.amberAccent],
+                ],
+                totalSwitches: 2,
+                labels: const ['AUTO', 'MANUAL'],
+                fontSize: 8,
+                iconSize: 30.0,
+                animate: true,
+                curve: Curves.bounceInOut,
+                onToggle: (value) async {
+                  try {
+                    context.read<LoadingProvider>().setLoad(true);
+                    await wdb.update({name[2]: value});
+                    context.read<LoadingProvider>().setLoad(false);
+                  } catch (e) {
+                    print(e);
+                  }
+                },
               ),
-              const SizedBox(
-                width: 1,
-              ),
-              Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text('OFF',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      ElevatedButton(
-                          onPressed: () async {
-                            final newTime = await showTimePicker(
-                              context: context,
-                              initialTime: initialTime,
-                            );
-                            if (newTime == null) {
-                              return;
-                            }
-                            setState(() {
-                              timeOff = newTime;
-                            });
-                            try {
-                              await _database.update({
-                                'data/lamp/offH/': timeOff.hour,
-                              });
-                              await _database
-                                  .update({'data/lamp/offM/': timeOff.minute});
-                            } catch (e) {
-                              showErrorDialog(context, e.toString());
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.redAccent,
-                              minimumSize: const Size(75, 35)),
-                          child: Text(
-                              '${lamp[2].toString().padLeft(2, '0')} : ${lamp[3].toString().padLeft(2, '0')}')),
-                    ],
-                  ))
             ],
           ),
         ),
-      ),
+        SizedBox(
+          width: 10,
+        ),
+        Container(
+          padding: EdgeInsets.all(8.0),
+          width: 160,
+          height: 120,
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(16)),
+          child: Column(
+            children: [
+              Text(
+                name[1],
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ToggleSwitch(
+                changeOnTap: false,
+                animationDuration: 300,
+                minWidth: 60,
+                minHeight: 40.0,
+                initialLabelIndex: db[1],
+                cornerRadius: 20.0,
+                activeFgColor: Colors.white,
+                inactiveBgColor: Colors.grey,
+                inactiveFgColor: Colors.white,
+                icons: const [
+                  Icons.flash_off_rounded,
+                  Icons.flash_on_rounded,
+                ],
+                totalSwitches: 2,
+                iconSize: 30.0,
+                activeBgColors: const [
+                  [Colors.black45, Colors.black26],
+                  [Colors.yellow, Colors.orange]
+                ],
+                animate: true,
+                curve: Curves.bounceInOut,
+                onToggle: (value) async {
+                  try {
+                    if (db[3] == 1) {
+                      context.read<LoadingProvider>().setLoad(true);
+                      await wdb.update({name[1]: value});
+                      context.read<LoadingProvider>().setLoad(false);
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: 'Please select manual mode!',
+                          gravity: ToastGravity.CENTER);
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ToggleSwitch(
+                changeOnTap: false,
+                animationDuration: 300,
+                radiusStyle: true,
+                minWidth: 60,
+                minHeight: 20.0,
+                initialLabelIndex: db[3],
+                cornerRadius: 20.0,
+                activeFgColor: Colors.white,
+                inactiveBgColor: Colors.grey,
+                inactiveFgColor: Colors.white,
+                activeBgColors: const [
+                  [Colors.green, Colors.amberAccent],
+                  [Colors.green, Colors.amberAccent],
+                ],
+                totalSwitches: 2,
+                labels: const ['AUTO', 'MANUAL'],
+                fontSize: 8,
+                iconSize: 30.0,
+                animate: true,
+                curve: Curves.bounceInOut,
+                onToggle: (value) async {
+                  try {
+                    context.read<LoadingProvider>().setLoad(true);
+                    await wdb.update({name[3]: value});
+                    context.read<LoadingProvider>().setLoad(false);
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

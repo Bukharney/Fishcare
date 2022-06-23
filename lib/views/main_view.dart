@@ -7,14 +7,14 @@ import 'package:fish_care/views/profile_view.dart';
 import 'package:fish_care/views/setings_view.dart';
 import 'package:flutter/material.dart';
 
-class NotesView extends StatefulWidget {
-  const NotesView({Key? key}) : super(key: key);
+class MainView extends StatefulWidget {
+  const MainView({Key? key}) : super(key: key);
 
   @override
-  State<NotesView> createState() => _NotesViewState();
+  State<MainView> createState() => _MainViewState();
 }
 
-class _NotesViewState extends State<NotesView> {
+class _MainViewState extends State<MainView> {
   int pageIndex = 1;
   @override
   Widget build(BuildContext context) {
@@ -44,30 +44,4 @@ class _NotesViewState extends State<NotesView> {
       ),
     );
   }
-}
-
-Future<bool> showLogOutDialog(BuildContext context) {
-  return showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text('Sign out'),
-        content: Text('Are you sure you went to sign out?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: Text('Yes'),
-          ),
-        ],
-      );
-    },
-  ).then((value) => value ?? false);
 }

@@ -3,9 +3,8 @@
 import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:fish_care/widget/day.dart';
-import 'package:fish_care/widget/lamp.dart';
-import 'package:fish_care/widget/temp.dart';
+import 'package:fish_care/widget/setlamp.dart';
+import 'package:fish_care/widget/settemp.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -72,11 +71,36 @@ class _SettingsViewState extends State<SettingsView> {
                   padding: const EdgeInsets.only(top: 15.0),
                   child: Column(
                     children: [
-                      Lamp(lamp: lamp),
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        width: 330,
+                        height: 100,
+                        decoration: BoxDecoration(
+                            color: Colors.black87,
+                            borderRadius: BorderRadius.circular(16)),
+                        child: Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Text('PROJECT',
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
+                            Text('SETTING',
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.white)),
+                          ],
+                        )),
+                      ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Temp(temp: temp),
+                      LampSettings(lamp: lamp),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TempSettings(temp: temp),
                     ],
                   ),
                 ),

@@ -4,7 +4,8 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fish_care/widget/day.dart';
-import 'package:fish_care/widget/lamp.dart';
+import 'package:fish_care/widget/setlamp.dart';
+import 'package:fish_care/widget/settemp.dart';
 import 'package:fish_care/widget/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -24,7 +25,7 @@ class _DisplayViewState extends State<DisplayView> {
 
   List<int> date = <int>[0, 0];
   List<int> lamp = <int>[0, 0, 0, 0];
-  List<double> temp = <double>[0.0, 0.0];
+  List<double> temp = <double>[0.0, 0.0, 0.0];
   var now = DateTime.now();
   late TimeOfDay timeOn;
   late TimeOfDay timeOff;
@@ -33,7 +34,7 @@ class _DisplayViewState extends State<DisplayView> {
   @override
   void initState() {
     _activateListners();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
       if (mounted) {
         setState(() {
           now = DateTime.now();
@@ -54,6 +55,7 @@ class _DisplayViewState extends State<DisplayView> {
         lamp[3] = event.snapshot.child('lamp/offM').value as int;
         temp[0] = event.snapshot.child('temp/low').value as double;
         temp[1] = event.snapshot.child('temp/high').value as double;
+        temp[2] = event.snapshot.child('temp/now').value as double;
       });
     });
   }
@@ -73,6 +75,10 @@ class _DisplayViewState extends State<DisplayView> {
                   child: Column(
                     children: [
                       Day(date: date),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Temp(temp: temp),
                     ],
                   ),
                 ),

@@ -1,136 +1,128 @@
-import 'package:firebase_database/firebase_database.dart';
+// ignore_for_file: prefer_const_constructors, must_be_immutable, no_logic_in_create_state
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class Temp extends StatefulWidget {
-  final List temp;
-  const Temp({Key? key, required this.temp}) : super(key: key);
-
+  List temp;
+  Temp({Key? key, required this.temp}) : super(key: key);
   @override
-  State<Temp> createState() => _TempState(temp);
+  _TempState createState() => _TempState(temp);
 }
 
 class _TempState extends State<Temp> {
   List temp;
   _TempState(this.temp);
-  late TimeOfDay timeOn;
-  late TimeOfDay timeOff;
-  final initialTime = TimeOfDay.now();
-  final _database = FirebaseDatabase.instance.ref();
-
-  final _controller1 = TextEditingController();
-  final _controller2 = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(1.0),
-        width: 330,
-        height: 100,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(16)),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 330,
+                height: 250,
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(221, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(16)),
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  width: 120,
-                  height: 70,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('Temp',
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold)),
+                  child: SfRadialGauge(
+                    title: GaugeTitle(
+                        borderWidth: 10,
+                        text: 'TEMPERATURE',
+                        textStyle: const TextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.bold)),
+                    axes: <RadialAxis>[
+                      RadialAxis(
+                        showLastLabel: true,
+                        showAxisLine: true,
+                        axisLineStyle: AxisLineStyle(
+                          cornerStyle: CornerStyle.bothCurve,
+                          thickness: 0.1,
+                          thicknessUnit: GaugeSizeUnit.factor,
+                          gradient: const SweepGradient(colors: <Color>[
+                            Color.fromARGB(255, 95, 195, 228),
+                            Color.fromARGB(255, 229, 93, 135)
+                          ], stops: <double>[
+                            0.25,
+                            0.75
+                          ]),
+                        ),
+                        minimum: 10,
+                        maximum: 40,
+                        pointers: <GaugePointer>[
+                          MarkerPointer(
+                            value: temp[0],
+                            markerType: MarkerType.diamond,
+                            markerHeight: 7,
+                            markerWidth: 7,
+                            borderWidth: 1.0,
+                            markerOffset: -10,
+                            color: Color.fromARGB(255, 74, 221, 0),
+                            borderColor: Color.fromARGB(255, 0, 0, 0),
+                          ),
+                          MarkerPointer(
+                            value: temp[1],
+                            markerType: MarkerType.diamond,
+                            markerHeight: 7,
+                            markerWidth: 7,
+                            borderWidth: 1.0,
+                            markerOffset: -10,
+                            color: Color.fromARGB(255, 207, 0, 0),
+                            borderColor: Color.fromARGB(255, 0, 0, 0),
+                          ),
+                          RangePointer(
+                            value: temp[2],
+                            enableAnimation: true,
+                            gradient: const SweepGradient(colors: <Color>[
+                              Color.fromARGB(255, 229, 93, 135),
+                              Color.fromARGB(255, 95, 195, 228),
+                            ], stops: <double>[
+                              0.25,
+                              0.75
+                            ]),
+                            cornerStyle: CornerStyle.bothCurve,
+                          ),
+                          NeedlePointer(
+                            value: temp[2],
+                            enableAnimation: true,
+                            needleStartWidth: 1,
+                            needleEndWidth: 3,
+                            knobStyle: KnobStyle(
+                                color: Colors.white,
+                                knobRadius: 0.07,
+                                borderColor: Colors.black,
+                                borderWidth: 0.02),
+                            tailStyle: TailStyle(
+                                width: 2,
+                                length: 20,
+                                lengthUnit: GaugeSizeUnit.logicalPixel,
+                                color: Colors.white,
+                                borderWidth: 3,
+                                borderColor: Colors.black),
+                          ),
+                        ],
+                        annotations: <GaugeAnnotation>[
+                          GaugeAnnotation(
+                              widget: Text('${temp[2].toString()}  ํc',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal)),
+                              angle: 90,
+                              positionFactor: 0.7)
+                        ],
+                      )
                     ],
                   ),
                 ),
-                const SizedBox(
-                  width: 2,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text('ON',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.lightGreen,
-                              maximumSize: const Size(90, 40)),
-                          child: Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: Center(
-                                child: TextField(
-                                  controller: _controller1,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(color: Colors.white),
-                                  keyboardType: TextInputType.number,
-                                  showCursor: false,
-                                  decoration: InputDecoration(
-                                      labelText: ' ${temp[0]}  ํc',
-                                      focusColor: Colors.white,
-                                      border: InputBorder.none,
-                                      labelStyle:
-                                          const TextStyle(color: Colors.white),
-                                      floatingLabelStyle: const TextStyle(
-                                          color: Colors.transparent),
-                                      suffixText: ' ํc',
-                                      suffixStyle:
-                                          const TextStyle(color: Colors.white)),
-                                  onSubmitted: (value) async {},
-                                ),
-                              ))),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  width: 1,
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text('OFF',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                                primary: Colors.redAccent,
-                                maximumSize: const Size(90, 40)),
-                            child: Padding(
-                                padding: const EdgeInsets.all(0.0),
-                                child: TextField(
-                                  controller: _controller2,
-                                  onSubmitted: (value) async {},
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(color: Colors.white),
-                                  keyboardType: TextInputType.number,
-                                  showCursor: false,
-                                  decoration: InputDecoration(
-                                      labelText: ' ${temp[1]}  ํc',
-                                      focusColor: Colors.white,
-                                      border: InputBorder.none,
-                                      labelStyle:
-                                          const TextStyle(color: Colors.white),
-                                      floatingLabelStyle: const TextStyle(
-                                          color: Colors.transparent),
-                                      suffixText: ' ํc',
-                                      suffixStyle:
-                                          const TextStyle(color: Colors.white)),
-                                ))),
-                      ],
-                    ))
-              ],
-            ),
+              ),
+            ],
           ),
-        ));
+        ],
+      ),
+    );
   }
 }
