@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.test.fish_care">
+    package="com.example.fish_care">
    <application
         android:label="fish_care"
         android:name="${applicationName}"
@@ -31,5 +31,4 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

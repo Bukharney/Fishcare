@@ -1,4 +1,4 @@
-package com.test.fish_care
+package com.example.fish_care
 
 import io.flutter.embedding.android.FlutterActivity
 

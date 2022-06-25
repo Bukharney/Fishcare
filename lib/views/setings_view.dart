@@ -108,7 +108,6 @@ class _SettingsViewState extends State<SettingsView> {
                         const SizedBox(
                           height: 10,
                         ),
-                        TempSettings(temp: temp),
                       ],
                     ),
                   ),

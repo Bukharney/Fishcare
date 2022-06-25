@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fish_care/widget/day.dart';
@@ -25,10 +26,14 @@ class _DisplayViewState extends State<DisplayView> {
   List<int> lamp = <int>[0, 0, 0, 0, 0, 0];
   List<double> temp = <double>[0.0, 0.0, 0.0];
   var now = DateTime.now();
+  List<DateTime> date0 = <DateTime>[
+    DateTime.parse("2021-12-11"),
+    DateTime.parse("2020-02-12"),
+  ];
   late TimeOfDay timeOn;
   late TimeOfDay timeOff;
   final initialTime = TimeOfDay.now();
-
+  late DateTime a;
   @override
   void initState() {
     _activateListners();
@@ -43,19 +48,18 @@ class _DisplayViewState extends State<DisplayView> {
   }
 
   Future<void> _activateListners() async {
-    _snap = _database.child('data').onValue.listen((event) {
+    _snap = _database.child('FISH').onValue.listen((event) {
       setState(() {
-        date[0] = event.snapshot.child('date/date').value as int;
-        date[1] = event.snapshot.child('date/num').value as int;
-        lamp[0] = event.snapshot.child('lamp/onH').value as int;
-        lamp[1] = event.snapshot.child('lamp/onM').value as int;
-        lamp[2] = event.snapshot.child('lamp/offH').value as int;
-        lamp[3] = event.snapshot.child('lamp/offM').value as int;
-        lamp[4] = event.snapshot.child('lamp/status').value as int;
-        lamp[5] = event.snapshot.child('lamp/mode').value as int;
-        temp[0] = event.snapshot.child('temp/low').value as double;
-        temp[1] = event.snapshot.child('temp/high').value as double;
-        temp[2] = event.snapshot.child('temp/now').value as double;
+        date[0] = event.snapshot.child('CHANGE/').value as int;
+        date[1] = event.snapshot.child('PREOID/').value as int;
+        date0[0] =
+            DateTime.parse(event.snapshot.child('DATE0/').value.toString());
+        date0[1] =
+            DateTime.parse(event.snapshot.child('DATE1/').value.toString());
+
+        lamp[0] = event.snapshot.child('LED/').value as int;
+        lamp[1] = event.snapshot.child('STATUS/').value as int;
+        temp[0] = event.snapshot.child('TEMP_WATER').value as double;
       });
     });
   }
@@ -76,7 +80,10 @@ class _DisplayViewState extends State<DisplayView> {
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        Day(date: date),
+                        Day(
+                          date: date,
+                          date0: date0,
+                        ),
                         const SizedBox(
                           height: 15,
                         ),

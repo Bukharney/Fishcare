@@ -1,41 +1,77 @@
 {
   "project_info": {
-    "project_number": "517887023342",
-    "firebase_url": "https://fishcare-6a320-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "fishcare-6a320",
-    "storage_bucket": "fishcare-6a320.appspot.com"
+    "project_number": "473863251380",
+    "firebase_url": "https://fishcare1-20855-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "fishcare1-20855",
+    "storage_bucket": "fishcare1-20855.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:517887023342:android:921940e7bf1395086d7bff",
+        "mobilesdk_app_id": "1:473863251380:android:18c520e9e3b60613d77ee1",
         "android_client_info": {
-          "package_name": "com.test.fish_care"
+          "package_name": "com.example.fish_care"
         }
       },
       "oauth_client": [
         {
-          "client_id": "517887023342-9mbdrt53fftgc2i8bebnepkjk5jdbi6v.apps.googleusercontent.com",
+          "client_id": "473863251380-1h98afl8k50j79l8m1ub6p9jvvti55rb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB-aVpUXs-LKuSKGfNob-xY1zGcldQFBsc"
+          "current_key": "AIzaSyDLjlMjlvfqTA-W5pbsjdh76CE128Ez2SQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "517887023342-9mbdrt53fftgc2i8bebnepkjk5jdbi6v.apps.googleusercontent.com",
+              "client_id": "473863251380-1h98afl8k50j79l8m1ub6p9jvvti55rb.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "517887023342-3tom7dvlpppt16pmles4fqf7hbramcc5.apps.googleusercontent.com",
+              "client_id": "473863251380-aqn6g7d863djtol927lsv3pd6msvt6n1.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.test.fishCare"
+                "bundle_id": "com.example.fishCare"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473863251380:android:5eeb1372d9b5b041d77ee1",
+        "android_client_info": {
+          "package_name": "com.test.fishcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473863251380-1h98afl8k50j79l8m1ub6p9jvvti55rb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLjlMjlvfqTA-W5pbsjdh76CE128Ez2SQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473863251380-1h98afl8k50j79l8m1ub6p9jvvti55rb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "473863251380-aqn6g7d863djtol927lsv3pd6msvt6n1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fishCare"
               }
             }
           ]

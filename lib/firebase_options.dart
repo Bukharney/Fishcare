@@ -44,44 +44,43 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAVv6MUeJoG9V7vuIiPne3TIY2YW4pzGOY',
-    appId: '1:517887023342:web:71255ebd5a6d55be6d7bff',
-    messagingSenderId: '517887023342',
-    projectId: 'fishcare-6a320',
-    authDomain: 'fishcare-6a320.firebaseapp.com',
-    databaseURL: 'https://fishcare-6a320-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'fishcare-6a320.appspot.com',
-    measurementId: 'G-9C9G9KRT96',
+    apiKey: 'AIzaSyAcl9_kUjG2XPN3klFL1BSnzJ3lhgYHWD4',
+    appId: '1:473863251380:web:37ff118b1d84ab90d77ee1',
+    messagingSenderId: '473863251380',
+    projectId: 'fishcare1-20855',
+    authDomain: 'fishcare1-20855.firebaseapp.com',
+    databaseURL: 'https://fishcare1-20855-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'fishcare1-20855.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB-aVpUXs-LKuSKGfNob-xY1zGcldQFBsc',
-    appId: '1:517887023342:android:921940e7bf1395086d7bff',
-    messagingSenderId: '517887023342',
-    projectId: 'fishcare-6a320',
-    databaseURL: 'https://fishcare-6a320-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'fishcare-6a320.appspot.com',
+    apiKey: 'AIzaSyDLjlMjlvfqTA-W5pbsjdh76CE128Ez2SQ',
+    appId: '1:473863251380:android:18c520e9e3b60613d77ee1',
+    messagingSenderId: '473863251380',
+    projectId: 'fishcare1-20855',
+    databaseURL: 'https://fishcare1-20855-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'fishcare1-20855.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDyt2invxgEWv3SGDGmcKBiTrZgfsi80j8',
-    appId: '1:517887023342:ios:355ac0b02fde2d3d6d7bff',
-    messagingSenderId: '517887023342',
-    projectId: 'fishcare-6a320',
-    databaseURL: 'https://fishcare-6a320-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'fishcare-6a320.appspot.com',
-    iosClientId: '517887023342-3tom7dvlpppt16pmles4fqf7hbramcc5.apps.googleusercontent.com',
-    iosBundleId: 'com.test.fishCare',
+    apiKey: 'AIzaSyC2di0wRudgv6-9QBDnR15c7UGFS1CRgDw',
+    appId: '1:473863251380:ios:75f97f908c1efa19d77ee1',
+    messagingSenderId: '473863251380',
+    projectId: 'fishcare1-20855',
+    databaseURL: 'https://fishcare1-20855-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'fishcare1-20855.appspot.com',
+    iosClientId: '473863251380-aqn6g7d863djtol927lsv3pd6msvt6n1.apps.googleusercontent.com',
+    iosBundleId: 'com.example.fishCare',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDyt2invxgEWv3SGDGmcKBiTrZgfsi80j8',
-    appId: '1:517887023342:ios:355ac0b02fde2d3d6d7bff',
-    messagingSenderId: '517887023342',
-    projectId: 'fishcare-6a320',
-    databaseURL: 'https://fishcare-6a320-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'fishcare-6a320.appspot.com',
-    iosClientId: '517887023342-3tom7dvlpppt16pmles4fqf7hbramcc5.apps.googleusercontent.com',
-    iosBundleId: 'com.test.fishCare',
+    apiKey: 'AIzaSyC2di0wRudgv6-9QBDnR15c7UGFS1CRgDw',
+    appId: '1:473863251380:ios:75f97f908c1efa19d77ee1',
+    messagingSenderId: '473863251380',
+    projectId: 'fishcare1-20855',
+    databaseURL: 'https://fishcare1-20855-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'fishcare1-20855.appspot.com',
+    iosClientId: '473863251380-aqn6g7d863djtol927lsv3pd6msvt6n1.apps.googleusercontent.com',
+    iosBundleId: 'com.example.fishCare',
   );
 }

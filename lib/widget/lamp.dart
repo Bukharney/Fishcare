@@ -43,7 +43,7 @@ class _LampState extends State<Lamp> {
               animationDuration: 100,
               minWidth: 100,
               minHeight: 40.0,
-              initialLabelIndex: lamp[4],
+              initialLabelIndex: lamp[0],
               cornerRadius: 20.0,
               activeFgColor: Colors.white,
               inactiveBgColor: Colors.grey,
@@ -61,10 +61,10 @@ class _LampState extends State<Lamp> {
               animate: true,
               curve: Curves.bounceInOut,
               onToggle: (value) async {
-                if (lamp[5] == 0) {
+                if (lamp[1] == 0) {
                   showErrorDialog(context, 'Plaese select manual first!');
                 } else {
-                  await _database.update({'data/lamp/status/': value});
+                  await _database.update({'FISH/LED/': value});
                 }
               },
             ),
@@ -77,7 +77,7 @@ class _LampState extends State<Lamp> {
               radiusStyle: true,
               minWidth: 80,
               minHeight: 20.0,
-              initialLabelIndex: lamp[5],
+              initialLabelIndex: lamp[1],
               cornerRadius: 20.0,
               activeFgColor: Colors.white,
               inactiveBgColor: Colors.grey,
@@ -93,7 +93,7 @@ class _LampState extends State<Lamp> {
               animate: true,
               curve: Curves.bounceInOut,
               onToggle: (value) async {
-                await _database.update({'data/lamp/mode/': value});
+                await _database.update({'FISH/STATUS/': value});
               },
             ),
           ],

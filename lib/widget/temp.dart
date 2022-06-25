@@ -50,28 +50,8 @@ class _TempState extends State<Temp> {
                 minimum: 10,
                 maximum: 40,
                 pointers: <GaugePointer>[
-                  MarkerPointer(
-                    value: temp[0],
-                    markerType: MarkerType.diamond,
-                    markerHeight: 7,
-                    markerWidth: 7,
-                    borderWidth: 1.0,
-                    markerOffset: -10,
-                    color: Color.fromARGB(255, 74, 221, 0),
-                    borderColor: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                  MarkerPointer(
-                    value: temp[1],
-                    markerType: MarkerType.diamond,
-                    markerHeight: 7,
-                    markerWidth: 7,
-                    borderWidth: 1.0,
-                    markerOffset: -10,
-                    color: Color.fromARGB(255, 207, 0, 0),
-                    borderColor: Color.fromARGB(255, 0, 0, 0),
-                  ),
                   RangePointer(
-                    value: temp[2],
+                    value: temp[0],
                     enableAnimation: true,
                     gradient: const SweepGradient(colors: <Color>[
                       Color.fromARGB(255, 229, 93, 135),
@@ -83,7 +63,7 @@ class _TempState extends State<Temp> {
                     cornerStyle: CornerStyle.bothCurve,
                   ),
                   NeedlePointer(
-                    value: temp[2],
+                    value: temp[0],
                     enableAnimation: true,
                     needleStartWidth: 1,
                     needleEndWidth: 3,

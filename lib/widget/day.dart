@@ -1,20 +1,22 @@
 import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Day extends StatefulWidget {
-  final List date;
-  const Day({Key? key, required this.date}) : super(key: key);
+  final List date, date0;
+  const Day({Key? key, required this.date, required this.date0})
+      : super(key: key);
 
   @override
-  State<Day> createState() => _DayState(date);
+  State<Day> createState() => _DayState(date, date0);
 }
 
 class _DayState extends State<Day> {
-  List date;
-  _DayState(this.date);
-
+  List date, date0;
+  _DayState(this.date, this.date0);
+  final _database = FirebaseDatabase.instance.ref();
   var now = DateTime.now();
 
   @override
@@ -76,7 +78,7 @@ class _DayState extends State<Day> {
                       Padding(
                         padding: const EdgeInsets.only(top: 1),
                         child: Text(
-                          "Remain ${date[1] - date[0]} Day",
+                          "Remain ${date0[1].difference(now).inDays} Day",
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
@@ -105,11 +107,11 @@ class _DayState extends State<Day> {
                   padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
                   child: Column(
                     children: [
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.all(0.0),
                         child: Text(
-                          '1',
-                          style: TextStyle(
+                          '${now.difference(date0[0]).inDays}',
+                          style: const TextStyle(
                               fontSize: 60,
                               fontWeight: FontWeight.w600,
                               color: Colors.white),
@@ -121,7 +123,16 @@ class _DayState extends State<Day> {
                           style: ElevatedButton.styleFrom(
                             primary: const Color.fromRGBO(202, 236, 219, 1),
                           ),
-                          onPressed: () async {},
+                          onPressed: () async {
+                            await _database.update({
+                              'FISH/DATE0/':
+                                  DateFormat('yyyy-MM-dd').format(now)
+                            });
+                            await _database.update({
+                              'FISH/DATE1/': DateFormat('yyyy-MM-dd')
+                                  .format(now.add(Duration(days: date[1])))
+                            });
+                          },
                           child: const Text('RESET',
                               style: TextStyle(
                                 fontSize: 14,
