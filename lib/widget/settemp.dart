@@ -25,15 +25,17 @@ class _TempSettingsState extends State<TempSettings> {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.all(1.0),
-        width: 330,
-        height: 100,
+        constraints: BoxConstraints.expand(
+          height:
+              Theme.of(context).textTheme.headline4!.fontSize! * 0.5 + 100.0,
+        ),
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(16)),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.only(right: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   padding: const EdgeInsets.all(8.0),
@@ -42,7 +44,7 @@ class _TempSettingsState extends State<TempSettings> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Text('Temp',
+                      Text('TEMP',
                           style: TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold)),
                     ],
@@ -54,7 +56,7 @@ class _TempSettingsState extends State<TempSettings> {
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Text('ON',

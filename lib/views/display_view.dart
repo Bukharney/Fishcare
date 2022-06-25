@@ -5,11 +5,8 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fish_care/widget/day.dart';
 import 'package:fish_care/widget/lamp.dart';
-import 'package:fish_care/widget/setlamp.dart';
-import 'package:fish_care/widget/settemp.dart';
 import 'package:fish_care/widget/temp.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class DisplayView extends StatefulWidget {
   const DisplayView({Key? key}) : super(key: key);
@@ -75,18 +72,21 @@ class _DisplayViewState extends State<DisplayView> {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 15.0),
-                  child: Column(
-                    children: [
-                      Day(date: date),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Temp(temp: temp),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Lamp(lamp: lamp),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        Day(date: date),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Temp(temp: temp),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Lamp(lamp: lamp),
+                      ],
+                    ),
                   ),
                 ),
               ),

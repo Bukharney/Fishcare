@@ -5,7 +5,6 @@ import 'package:fish_care/services/auth/auth_exceptions.dart';
 import 'package:fish_care/services/auth/auth_service.dart';
 import 'package:fish_care/utilities/show_error_dialog.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as dev show log;
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -165,7 +164,6 @@ class _RegisterViewState extends State<RegisterView> {
                         email: email,
                         password: password,
                       );
-                      final user = AuhtService.firebase().currentUser;
                       AuhtService.firebase().sendEmailVerification();
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           loginRoute, (route) => false);

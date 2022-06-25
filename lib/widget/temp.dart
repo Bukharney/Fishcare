@@ -15,113 +15,104 @@ class _TempState extends State<Temp> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 330,
-                height: 250,
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(221, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(16)),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SfRadialGauge(
-                    title: GaugeTitle(
-                        borderWidth: 10,
-                        text: 'TEMPERATURE',
-                        textStyle: const TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.bold)),
-                    axes: <RadialAxis>[
-                      RadialAxis(
-                        showLastLabel: true,
-                        showAxisLine: true,
-                        axisLineStyle: AxisLineStyle(
-                          cornerStyle: CornerStyle.bothCurve,
-                          thickness: 0.1,
-                          thicknessUnit: GaugeSizeUnit.factor,
-                          gradient: const SweepGradient(colors: <Color>[
-                            Color.fromARGB(255, 95, 195, 228),
-                            Color.fromARGB(255, 229, 93, 135)
-                          ], stops: <double>[
-                            0.25,
-                            0.75
-                          ]),
-                        ),
-                        minimum: 10,
-                        maximum: 40,
-                        pointers: <GaugePointer>[
-                          MarkerPointer(
-                            value: temp[0],
-                            markerType: MarkerType.diamond,
-                            markerHeight: 7,
-                            markerWidth: 7,
-                            borderWidth: 1.0,
-                            markerOffset: -10,
-                            color: Color.fromARGB(255, 74, 221, 0),
-                            borderColor: Color.fromARGB(255, 0, 0, 0),
-                          ),
-                          MarkerPointer(
-                            value: temp[1],
-                            markerType: MarkerType.diamond,
-                            markerHeight: 7,
-                            markerWidth: 7,
-                            borderWidth: 1.0,
-                            markerOffset: -10,
-                            color: Color.fromARGB(255, 207, 0, 0),
-                            borderColor: Color.fromARGB(255, 0, 0, 0),
-                          ),
-                          RangePointer(
-                            value: temp[2],
-                            enableAnimation: true,
-                            gradient: const SweepGradient(colors: <Color>[
-                              Color.fromARGB(255, 229, 93, 135),
-                              Color.fromARGB(255, 95, 195, 228),
-                            ], stops: <double>[
-                              0.25,
-                              0.75
-                            ]),
-                            cornerStyle: CornerStyle.bothCurve,
-                          ),
-                          NeedlePointer(
-                            value: temp[2],
-                            enableAnimation: true,
-                            needleStartWidth: 1,
-                            needleEndWidth: 3,
-                            knobStyle: KnobStyle(
-                                color: Colors.white,
-                                knobRadius: 0.07,
-                                borderColor: Colors.black,
-                                borderWidth: 0.02),
-                            tailStyle: TailStyle(
-                                width: 2,
-                                length: 20,
-                                lengthUnit: GaugeSizeUnit.logicalPixel,
-                                color: Colors.white,
-                                borderWidth: 3,
-                                borderColor: Colors.black),
-                          ),
-                        ],
-                        annotations: <GaugeAnnotation>[
-                          GaugeAnnotation(
-                              widget: Text('${temp[2].toString()}  ํc',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal)),
-                              angle: 90,
-                              positionFactor: 0.7)
-                        ],
-                      )
-                    ],
-                  ),
+      child: Container(
+        constraints: BoxConstraints.expand(
+          height:
+              Theme.of(context).textTheme.headline4!.fontSize! * 0.5 + 300.0,
+        ),
+        decoration: BoxDecoration(
+            color: Color.fromARGB(221, 255, 255, 255),
+            borderRadius: BorderRadius.circular(16)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SfRadialGauge(
+            title: GaugeTitle(
+                borderWidth: 10,
+                text: 'TEMPERATURE',
+                textStyle: const TextStyle(
+                    fontSize: 16.0, fontWeight: FontWeight.bold)),
+            axes: <RadialAxis>[
+              RadialAxis(
+                showLastLabel: true,
+                showAxisLine: true,
+                axisLineStyle: AxisLineStyle(
+                  cornerStyle: CornerStyle.bothCurve,
+                  thickness: 0.1,
+                  thicknessUnit: GaugeSizeUnit.factor,
+                  gradient: const SweepGradient(colors: <Color>[
+                    Color.fromARGB(255, 95, 195, 228),
+                    Color.fromARGB(255, 229, 93, 135)
+                  ], stops: <double>[
+                    0.25,
+                    0.75
+                  ]),
                 ),
-              ),
+                minimum: 10,
+                maximum: 40,
+                pointers: <GaugePointer>[
+                  MarkerPointer(
+                    value: temp[0],
+                    markerType: MarkerType.diamond,
+                    markerHeight: 7,
+                    markerWidth: 7,
+                    borderWidth: 1.0,
+                    markerOffset: -10,
+                    color: Color.fromARGB(255, 74, 221, 0),
+                    borderColor: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                  MarkerPointer(
+                    value: temp[1],
+                    markerType: MarkerType.diamond,
+                    markerHeight: 7,
+                    markerWidth: 7,
+                    borderWidth: 1.0,
+                    markerOffset: -10,
+                    color: Color.fromARGB(255, 207, 0, 0),
+                    borderColor: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                  RangePointer(
+                    value: temp[2],
+                    enableAnimation: true,
+                    gradient: const SweepGradient(colors: <Color>[
+                      Color.fromARGB(255, 229, 93, 135),
+                      Color.fromARGB(255, 95, 195, 228),
+                    ], stops: <double>[
+                      0.25,
+                      0.75
+                    ]),
+                    cornerStyle: CornerStyle.bothCurve,
+                  ),
+                  NeedlePointer(
+                    value: temp[2],
+                    enableAnimation: true,
+                    needleStartWidth: 1,
+                    needleEndWidth: 3,
+                    knobStyle: KnobStyle(
+                        color: Colors.white,
+                        knobRadius: 0.07,
+                        borderColor: Colors.black,
+                        borderWidth: 0.02),
+                    tailStyle: TailStyle(
+                        width: 2,
+                        length: 20,
+                        lengthUnit: GaugeSizeUnit.logicalPixel,
+                        color: Colors.white,
+                        borderWidth: 3,
+                        borderColor: Colors.black),
+                  ),
+                ],
+                annotations: <GaugeAnnotation>[
+                  GaugeAnnotation(
+                      widget: Text('${temp[2].toString()}  ํc',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.normal)),
+                      angle: 90,
+                      positionFactor: 0.7)
+                ],
+              )
             ],
           ),
-        ],
+        ),
       ),
     );
   }

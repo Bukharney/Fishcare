@@ -5,6 +5,7 @@ import 'package:fish_care/services/auth/auth_exceptions.dart';
 import 'package:fish_care/services/auth/auth_service.dart';
 import 'package:fish_care/utilities/show_error_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -205,7 +206,8 @@ class _LoginViewState extends State<LoginView> {
                       } on GenericAuthException {
                         await showErrorDialog(context, 'Authentication error');
                       } catch (e) {
-                        await showErrorDialog(context, e.toString());
+                        await Fluttertoast.showToast(
+                            msg: e.toString(), gravity: ToastGravity.CENTER);
                       }
                     },
                     icon: Icon(

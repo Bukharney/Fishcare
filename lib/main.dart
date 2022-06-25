@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fish_care/constants/routes.dart';
+import 'package:fish_care/firebase_options.dart';
 import 'package:fish_care/services/auth/auth_service.dart';
 import 'package:fish_care/views/login_view.dart';
 import 'package:fish_care/views/main_view.dart';
@@ -9,15 +10,16 @@ import 'package:fish_care/views/display_view.dart';
 import 'package:fish_care/views/verify_email.view.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MaterialApp(
-    title: 'Flutter Demo',
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-    ),
-    home: const HomePage(),
     routes: {
+      '/': (context) {
+        return HomePage();
+      },
       loginRoute: (context) => LoginView(),
       registerRoute: (context) => RegisterView(),
       mainRoute: (context) => MainView(),
@@ -27,9 +29,14 @@ void main() {
   ));
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

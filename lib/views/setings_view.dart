@@ -64,48 +64,57 @@ class _SettingsViewState extends State<SettingsView> {
         resizeToAvoidBottomInset: true,
         backgroundColor: const Color.fromRGBO(137, 209, 172, 1),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        width: 330,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            color: Colors.black87,
-                            borderRadius: BorderRadius.circular(16)),
-                        child: Center(
-                            child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text('PROJECT',
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
-                            Text('SETTING',
-                                style: TextStyle(
-                                    fontSize: 14, color: Colors.white)),
-                          ],
-                        )),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      LampSettings(lamp: lamp),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TempSettings(temp: temp),
-                    ],
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(5),
+                          constraints: BoxConstraints.expand(
+                            height: Theme.of(context)
+                                        .textTheme
+                                        .headline4!
+                                        .fontSize! *
+                                    0.5 +
+                                100.0,
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.black87,
+                              borderRadius: BorderRadius.circular(16)),
+                          child: Center(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text('PROJECT',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white)),
+                              Text('SETTING',
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.white)),
+                            ],
+                          )),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        LampSettings(lamp: lamp),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TempSettings(temp: temp),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

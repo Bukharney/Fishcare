@@ -14,13 +14,12 @@ class Day extends StatefulWidget {
 class _DayState extends State<Day> {
   List date;
   _DayState(this.date);
-  late DateTime date1 = DateTime.now();
-  late Timer _timer;
+
   var now = DateTime.now();
 
   @override
   void initState() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       if (mounted) {
         setState(() {
           now = DateTime.now();
@@ -33,9 +32,10 @@ class _DayState extends State<Day> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints.expand(
+        height: Theme.of(context).textTheme.headline4!.fontSize! * 0.5 + 200.0,
+      ),
       padding: const EdgeInsets.all(8.0),
-      width: 330,
-      height: 165,
       decoration: BoxDecoration(
           color: Colors.black87, borderRadius: BorderRadius.circular(16)),
       child: Center(
@@ -66,7 +66,7 @@ class _DayState extends State<Day> {
                       Padding(
                         padding: const EdgeInsets.only(top: 1),
                         child: Text(
-                          DateFormat().format(date1),
+                          DateFormat().format(now),
                           style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,

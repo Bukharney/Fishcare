@@ -22,19 +22,17 @@ class _LampSettingsState extends State<LampSettings> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(1.0),
-      width: 330,
-      height: 100,
+      constraints: BoxConstraints.expand(
+        height: Theme.of(context).textTheme.headline4!.fontSize! * 0.5 + 100.0,
+      ),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(16)),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.only(right: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 10,
-              ),
               Container(
                 padding: const EdgeInsets.all(8.0),
                 width: 120,
@@ -42,7 +40,7 @@ class _LampSettingsState extends State<LampSettings> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Text('Lamp',
+                    Text('LAMP',
                         style: TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold)),
                   ],
@@ -54,7 +52,7 @@ class _LampSettingsState extends State<LampSettings> {
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const Text('ON',
@@ -82,9 +80,14 @@ class _LampSettingsState extends State<LampSettings> {
                       },
                       style: ElevatedButton.styleFrom(
                           primary: Colors.lightGreen,
-                          minimumSize: const Size(75, 35)),
-                      child: Text(
-                          '${lamp[0].toString().padLeft(2, '0')} : ${lamp[1].toString().padLeft(2, '0')}'),
+                          maximumSize: const Size(90, 40)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Center(
+                          child: Text(
+                              '${lamp[0].toString().padLeft(2, '0')} : ${lamp[1].toString().padLeft(2, '0')}'),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -93,42 +96,49 @@ class _LampSettingsState extends State<LampSettings> {
                 width: 1,
               ),
               Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text('OFF',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      ElevatedButton(
-                          onPressed: () async {
-                            final newTime = await showTimePicker(
-                              context: context,
-                              initialTime: initialTime,
-                            );
-                            if (newTime == null) {
-                              return;
-                            }
-                            setState(() {
-                              timeOff = newTime;
-                            });
-                            try {
-                              await _database.update({
-                                'data/lamp/offH/': timeOff.hour,
-                              });
-                              await _database
-                                  .update({'data/lamp/offM/': timeOff.minute});
-                            } catch (e) {
-                              showErrorDialog(context, e.toString());
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.redAccent,
-                              minimumSize: const Size(75, 35)),
+                padding: const EdgeInsets.all(0.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text('OFF',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final newTime = await showTimePicker(
+                          context: context,
+                          initialTime: initialTime,
+                        );
+                        if (newTime == null) {
+                          return;
+                        }
+                        setState(() {
+                          timeOff = newTime;
+                        });
+                        try {
+                          await _database.update({
+                            'data/lamp/offH/': timeOff.hour,
+                          });
+                          await _database
+                              .update({'data/lamp/offM/': timeOff.minute});
+                        } catch (e) {
+                          showErrorDialog(context, e.toString());
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.redAccent,
+                          maximumSize: const Size(90, 40)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Center(
                           child: Text(
-                              '${lamp[2].toString().padLeft(2, '0')} : ${lamp[3].toString().padLeft(2, '0')}')),
-                    ],
-                  ))
+                              '${lamp[2].toString().padLeft(2, '0')} : ${lamp[3].toString().padLeft(2, '0')}'),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
