@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
 import 'dart:developer';
 
@@ -17,7 +15,6 @@ class DisplayView extends StatefulWidget {
 }
 
 class _DisplayViewState extends State<DisplayView> {
-  late DateTime date1 = DateTime.now();
   final _database = FirebaseDatabase.instance.ref();
   late StreamSubscription _snap;
   late Timer _timer;
@@ -30,10 +27,10 @@ class _DisplayViewState extends State<DisplayView> {
     DateTime.parse("2021-12-11"),
     DateTime.parse("2020-02-12"),
   ];
-  late TimeOfDay timeOn;
-  late TimeOfDay timeOff;
-  final initialTime = TimeOfDay.now();
-  late DateTime a;
+  List<TimeOfDay> time = <TimeOfDay>[
+    TimeOfDay.now(),
+    TimeOfDay.now(),
+  ];
   @override
   void initState() {
     _activateListners();
@@ -59,7 +56,7 @@ class _DisplayViewState extends State<DisplayView> {
 
         lamp[0] = event.snapshot.child('LED/').value as int;
         lamp[1] = event.snapshot.child('STATUS/').value as int;
-        temp[0] = event.snapshot.child('TEMP_WATER').value as double;
+        temp[0] = event.snapshot.child('TEMP_WATER/').value as double;
       });
     });
   }

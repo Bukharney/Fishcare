@@ -70,10 +70,9 @@ class _LampSettingsState extends State<LampSettings> {
                           timeOn = newTime;
                         });
                         try {
+                          await _database.update({'FISH/LEDONH/': timeOn.hour});
                           await _database
-                              .update({'data/lamp/onH/': timeOn.hour});
-                          await _database
-                              .update({'data/lamp/onM/': timeOn.minute});
+                              .update({'FISH/LEDONM/': timeOn.minute});
                         } catch (e) {
                           showErrorDialog(context, e.toString());
                         }
@@ -117,10 +116,10 @@ class _LampSettingsState extends State<LampSettings> {
                         });
                         try {
                           await _database.update({
-                            'data/lamp/offH/': timeOff.hour,
+                            'FISH/LEDOFFH/': timeOff.hour,
                           });
                           await _database
-                              .update({'data/lamp/offM/': timeOff.minute});
+                              .update({'FISH/LEDOFFM/': timeOff.minute});
                         } catch (e) {
                           showErrorDialog(context, e.toString());
                         }

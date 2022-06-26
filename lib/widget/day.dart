@@ -124,14 +124,46 @@ class _DayState extends State<Day> {
                             primary: const Color.fromRGBO(202, 236, 219, 1),
                           ),
                           onPressed: () async {
-                            await _database.update({
-                              'FISH/DATE0/':
-                                  DateFormat('yyyy-MM-dd').format(now)
-                            });
-                            await _database.update({
-                              'FISH/DATE1/': DateFormat('yyyy-MM-dd')
-                                  .format(now.add(Duration(days: date[1])))
-                            });
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Reset'),
+                                  content: const Text(
+                                      'Are you sure you want to reset?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop(false);
+                                      },
+                                      child: const Text(
+                                        'Cancel',
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () async {
+                                        await _database.update({
+                                          'FISH/DATE0/':
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(now)
+                                        });
+                                        await _database.update({
+                                          'FISH/DATE1/':
+                                              DateFormat('yyyy-MM-dd').format(
+                                                  now.add(
+                                                      Duration(days: date[1])))
+                                        });
+                                        Navigator.of(context).pop(true);
+                                      },
+                                      child: const Text('Yes'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ).then((value) => value ?? false);
                           },
                           child: const Text('RESET',
                               style: TextStyle(

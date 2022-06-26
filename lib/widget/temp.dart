@@ -83,9 +83,9 @@ class _TempState extends State<Temp> {
                 ],
                 annotations: <GaugeAnnotation>[
                   GaugeAnnotation(
-                      widget: Text('${temp[2].toString()}  ํc',
+                      widget: Text('${temp[0].toString()}  ํc',
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.normal)),
+                              fontSize: 14, fontWeight: FontWeight.bold)),
                       angle: 90,
                       positionFactor: 0.7)
                 ],
