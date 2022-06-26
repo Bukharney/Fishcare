@@ -78,7 +78,7 @@ class _DayState extends State<Day> {
                       Padding(
                         padding: const EdgeInsets.only(top: 1),
                         child: Text(
-                          "Remain ${date0[1].difference(now).inDays} Day",
+                          "Remain ${date0[1].difference(now).inDays + 1} Day",
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
@@ -110,7 +110,7 @@ class _DayState extends State<Day> {
                       Padding(
                         padding: EdgeInsets.all(0.0),
                         child: Text(
-                          '${now.difference(date0[0]).inDays}',
+                          '${now.difference(date0[0]).inDays + 1}',
                           style: const TextStyle(
                               fontSize: 60,
                               fontWeight: FontWeight.w600,
@@ -132,33 +132,69 @@ class _DayState extends State<Day> {
                                   content: const Text(
                                       'Are you sure you want to reset?'),
                                   actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop(false);
-                                      },
-                                      child: const Text(
-                                        'Cancel',
-                                        style: TextStyle(
-                                          color: Colors.grey,
+                                    TextField(
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        hintText: 'Enter period',
+                                        hintStyle: TextStyle(
+                                            color: Colors.grey[700],
+                                            fontSize: 15),
+                                        border: UnderlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.white,
+                                                width: 2.0),
+                                            borderRadius:
+                                                BorderRadius.circular(30.0)),
+                                        fillColor: Colors.white,
+                                        filled: true,
+                                        focusedBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.blue, width: 2.0),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(25.0)),
                                         ),
                                       ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () async {
-                                        await _database.update({
-                                          'FISH/DATE0/':
-                                              DateFormat('yyyy-MM-dd')
-                                                  .format(now)
-                                        });
-                                        await _database.update({
-                                          'FISH/DATE1/':
-                                              DateFormat('yyyy-MM-dd').format(
-                                                  now.add(
-                                                      Duration(days: date[1])))
-                                        });
-                                        Navigator.of(context).pop(true);
+                                      onChanged: (value) async {
+                                        date[1] = int.parse(value);
                                       },
-                                      child: const Text('Yes'),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop(false);
+                                          },
+                                          child: const Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () async {
+                                            await _database.update(
+                                                {'FISH/PREOID/': date[1]});
+                                            await _database.update({
+                                              'FISH/DATE0/':
+                                                  DateFormat('yyyy-MM-dd')
+                                                      .format(now)
+                                            });
+                                            await _database.update({
+                                              'FISH/DATE1/': DateFormat(
+                                                      'yyyy-MM-dd')
+                                                  .format(now.add(
+                                                      Duration(days: date[1])))
+                                            });
+                                            Navigator.of(context).pop(true);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 );

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:fish_care/utilities/show_error_dialog.dart';
 import 'package:fish_care/widget/day.dart';
 import 'package:fish_care/widget/lamp.dart';
 import 'package:fish_care/widget/pump.dart';
@@ -36,6 +37,7 @@ class _DisplayViewState extends State<DisplayView> {
     TimeOfDay.now(),
     TimeOfDay.now(),
   ];
+
   @override
   void initState() {
     _activateListners();
@@ -43,6 +45,9 @@ class _DisplayViewState extends State<DisplayView> {
       if (mounted) {
         setState(() {
           now = DateTime.now();
+          if (date0[1].difference(now).inDays < 0) {
+            showErrorDialog(context, 'Plaese change watar and reset device!');
+          }
         });
       }
     });
@@ -66,11 +71,6 @@ class _DisplayViewState extends State<DisplayView> {
         temp[0] =
             double.parse(event.snapshot.child('TEMP_WATER/').value.toString());
         _database.update({'FISH/DATE/': now.difference(date0[0]).inDays});
-        _database.update({
-          'FISH/DATE1/': DateFormat('yyyy-MM-dd')
-              .format(date0[0].add(const Duration(days: 5)))
-              .toString()
-        });
       });
     });
   }
