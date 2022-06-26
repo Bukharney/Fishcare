@@ -40,8 +40,8 @@ class _TempState extends State<Temp> {
                   thickness: 0.1,
                   thicknessUnit: GaugeSizeUnit.factor,
                   gradient: const SweepGradient(colors: <Color>[
+                    Color.fromARGB(255, 229, 93, 135),
                     Color.fromARGB(255, 95, 195, 228),
-                    Color.fromARGB(255, 229, 93, 135)
                   ], stops: <double>[
                     0.25,
                     0.75
@@ -54,11 +54,11 @@ class _TempState extends State<Temp> {
                     value: temp[0],
                     enableAnimation: true,
                     gradient: const SweepGradient(colors: <Color>[
-                      Color.fromARGB(255, 229, 93, 135),
                       Color.fromARGB(255, 95, 195, 228),
+                      Color.fromARGB(255, 229, 93, 135),
                     ], stops: <double>[
-                      0.25,
-                      0.75
+                      0.50,
+                      0.90
                     ]),
                     cornerStyle: CornerStyle.bothCurve,
                   ),
@@ -83,7 +83,7 @@ class _TempState extends State<Temp> {
                 ],
                 annotations: <GaugeAnnotation>[
                   GaugeAnnotation(
-                      widget: Text('${temp[0].toString()}  ํc',
+                      widget: Text('${temp[0].toStringAsFixed(2)}  ํc',
                           style: TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold)),
                       angle: 90,
