@@ -3,17 +3,17 @@ import 'package:fish_care/utilities/show_error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-class Servo extends StatefulWidget {
-  List servo;
-  Servo({Key? key, required this.servo}) : super(key: key);
+class Change extends StatefulWidget {
+  List change;
+  Change({Key? key, required this.change}) : super(key: key);
 
   @override
-  State<Servo> createState() => _ServoState(servo);
+  State<Change> createState() => _ChangeState(change);
 }
 
-class _ServoState extends State<Servo> {
-  List servo;
-  _ServoState(this.servo);
+class _ChangeState extends State<Change> {
+  List change;
+  _ChangeState(this.change);
   final _database = FirebaseDatabase.instance.ref();
 
   @override
@@ -35,7 +35,7 @@ class _ServoState extends State<Servo> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'SERVO',
+                  'CHANGE',
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(
@@ -46,7 +46,7 @@ class _ServoState extends State<Servo> {
                   animationDuration: 100,
                   minWidth: 100,
                   minHeight: 40.0,
-                  initialLabelIndex: servo[0],
+                  initialLabelIndex: change[0],
                   cornerRadius: 20.0,
                   activeFgColor: Colors.white,
                   inactiveBgColor: Colors.grey,
@@ -64,7 +64,7 @@ class _ServoState extends State<Servo> {
                   animate: true,
                   curve: Curves.bounceInOut,
                   onToggle: (value) async {
-                    await _database.update({'FISH/SERVO/': value});
+                    await _database.update({'FISH/CHANGE/': value});
                   },
                 ),
                 const SizedBox(

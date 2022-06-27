@@ -6,7 +6,7 @@ import 'package:fish_care/utilities/show_error_dialog.dart';
 import 'package:fish_care/widget/day.dart';
 import 'package:fish_care/widget/lamp.dart';
 import 'package:fish_care/widget/pump.dart';
-import 'package:fish_care/widget/servo.dart';
+import 'package:fish_care/widget/change.dart';
 import 'package:fish_care/widget/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -27,7 +27,7 @@ class _DisplayViewState extends State<DisplayView> {
   List<int> lamp = <int>[0, 0, 0, 0];
   List<double> temp = <double>[0.0, 0.0];
   List<int> pump = <int>[0, 0];
-  List<int> servo = <int>[0, 0];
+  List<int> change = <int>[0, 0];
   var now = DateTime.now();
   List<DateTime> date0 = <DateTime>[
     DateTime.parse("2021-12-11"),
@@ -67,7 +67,7 @@ class _DisplayViewState extends State<DisplayView> {
         lamp[1] = event.snapshot.child('STATUS/').value as int;
         pump[0] = event.snapshot.child('PUMPIN/').value as int;
         pump[1] = event.snapshot.child('PUMPOUT/').value as int;
-        servo[0] = event.snapshot.child('SERVO/').value as int;
+        change[0] = event.snapshot.child('CHANGE/').value as int;
         temp[0] =
             double.parse(event.snapshot.child('TEMP_WATER/').value.toString());
         _database.update({'FISH/DATE/': now.difference(date0[0]).inDays});
@@ -110,7 +110,7 @@ class _DisplayViewState extends State<DisplayView> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Servo(servo: servo),
+                        Change(change: change),
                       ],
                     ),
                   ),
