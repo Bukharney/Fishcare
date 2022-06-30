@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fish_care/widget/setlamp.dart';
-import 'package:fish_care/widget/settemp.dart';
+import 'package:fish_care/widget/source.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -21,6 +21,7 @@ class _SettingsViewState extends State<SettingsView> {
   late Timer _timer;
   var now = DateTime.now();
   List<int> time = <int>[0, 0, 0, 0];
+  List<int> source = <int>[0, 0, 0];
 
   @override
   void initState() {
@@ -42,6 +43,13 @@ class _SettingsViewState extends State<SettingsView> {
         time[1] = event.snapshot.child('LEDONM/').value as int;
         time[2] = event.snapshot.child('LEDOFFH/').value as int;
         time[3] = event.snapshot.child('LEDOFFM/').value as int;
+        source[2] = event.snapshot.child('DLAY/').value as int;
+      });
+    });
+    _snap = _database.child('STATUSNODE').onValue.listen((event) {
+      setState(() {
+        source[0] = event.snapshot.child('MAIN/').value as int;
+        source[1] = event.snapshot.child('TEMP/').value as int;
       });
     });
   }
@@ -90,6 +98,10 @@ class _SettingsViewState extends State<SettingsView> {
                             ],
                           )),
                         ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Mornitor(source: source),
                         const SizedBox(
                           height: 10,
                         ),

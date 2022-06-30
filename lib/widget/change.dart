@@ -34,9 +34,9 @@ class _ChangeState extends State<Change> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'CHANGE',
-                  style: TextStyle(fontWeight: FontWeight.w600),
+                Text(
+                  'CHANGE : ${change[0]}',
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(
                   height: 10,

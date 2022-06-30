@@ -100,7 +100,7 @@ class _ProfileViewState extends State<ProfileView> {
                           borderRadius: BorderRadius.circular(16)),
                       child: Center(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
                               'ACCOUNT',
@@ -109,7 +109,6 @@ class _ProfileViewState extends State<ProfileView> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
                             ),
-                            SizedBox(height: 10),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   minimumSize: Size(200, 40),
@@ -244,7 +243,6 @@ class _ProfileViewState extends State<ProfileView> {
                               },
                               child: Text('CHANGE PASSWORD'),
                             ),
-                            SizedBox(height: 10),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   minimumSize: Size(200, 40),
@@ -301,7 +299,6 @@ class _ProfileViewState extends State<ProfileView> {
                               },
                               child: Text('SIGN OUT'),
                             ),
-                            SizedBox(height: 10),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   minimumSize: Size(200, 40),

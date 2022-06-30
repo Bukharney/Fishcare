@@ -37,7 +37,7 @@ class _TempState extends State<Temp> {
                 showAxisLine: true,
                 axisLineStyle: AxisLineStyle(
                   cornerStyle: CornerStyle.bothCurve,
-                  thickness: 0.1,
+                  thickness: 0.09,
                   thicknessUnit: GaugeSizeUnit.factor,
                   gradient: const SweepGradient(colors: <Color>[
                     Color.fromARGB(255, 229, 93, 135),
@@ -53,13 +53,13 @@ class _TempState extends State<Temp> {
                   RangePointer(
                     value: temp[0],
                     enableAnimation: true,
-                    gradient: const SweepGradient(colors: <Color>[
-                      Color.fromARGB(255, 95, 195, 228),
-                      Color.fromARGB(255, 229, 93, 135),
-                    ], stops: <double>[
-                      0.50,
-                      0.90
-                    ]),
+                    gradient: const SweepGradient(
+                      colors: <Color>[
+                        Color.fromARGB(255, 95, 195, 228),
+                        Color.fromARGB(255, 229, 93, 135),
+                      ],
+                      stops: <double>[0.50, 0.90],
+                    ),
                     cornerStyle: CornerStyle.bothCurve,
                   ),
                   NeedlePointer(

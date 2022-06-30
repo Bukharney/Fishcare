@@ -31,15 +31,11 @@ class _PumpState extends State<Pump> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text(
                   'PUMP IN',
                   style: TextStyle(fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
                 ToggleSwitch(
                   changeOnTap: false,
@@ -67,24 +63,17 @@ class _PumpState extends State<Pump> {
                     await _database.update({'FISH/PUMPIN/': value});
                   },
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
               ],
             ),
             const SizedBox(
               width: 20,
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text(
                   'PUMP OUT',
                   style: TextStyle(fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
                 ToggleSwitch(
                   changeOnTap: false,
@@ -111,9 +100,6 @@ class _PumpState extends State<Pump> {
                   onToggle: (value) async {
                     await _database.update({'FISH/PUMPOUT/': value});
                   },
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
               ],
             ),

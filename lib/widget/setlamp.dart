@@ -31,7 +31,7 @@ class _LampSettingsState extends State<LampSettings> {
         child: Padding(
           padding: const EdgeInsets.only(right: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
                 padding: const EdgeInsets.all(8.0),
@@ -46,97 +46,97 @@ class _LampSettingsState extends State<LampSettings> {
                   ],
                 ),
               ),
-              const SizedBox(
-                width: 2,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text('ON',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final newTime = await showTimePicker(
-                          context: context,
-                          initialTime: initialTime,
-                        );
-                        if (newTime == null) {
-                          return;
-                        }
-                        setState(() {
-                          timeOn = newTime;
-                        });
-                        try {
-                          await _database.update({'FISH/LEDONH/': timeOn.hour});
-                          await _database
-                              .update({'FISH/LEDONM/': timeOn.minute});
-                        } catch (e) {
-                          showErrorDialog(context, e.toString());
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.lightGreen,
-                          maximumSize: const Size(90, 40)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0.0),
-                        child: Center(
-                          child: Text(
-                              '${lamp[0].toString().padLeft(2, '0')} : ${lamp[1].toString().padLeft(2, '0')}'),
-                        ),
+              Row(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Text('ON',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                width: 1,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text('OFF',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final newTime = await showTimePicker(
-                          context: context,
-                          initialTime: initialTime,
-                        );
-                        if (newTime == null) {
-                          return;
-                        }
-                        setState(() {
-                          timeOff = newTime;
-                        });
-                        try {
-                          await _database.update({
-                            'FISH/LEDOFFH/': timeOff.hour,
+                      ElevatedButton(
+                        onPressed: () async {
+                          final newTime = await showTimePicker(
+                            context: context,
+                            initialTime: initialTime,
+                          );
+                          if (newTime == null) {
+                            return;
+                          }
+                          setState(() {
+                            timeOn = newTime;
                           });
-                          await _database
-                              .update({'FISH/LEDOFFM/': timeOff.minute});
-                        } catch (e) {
-                          showErrorDialog(context, e.toString());
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.redAccent,
-                          maximumSize: const Size(90, 40)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0.0),
-                        child: Center(
-                          child: Text(
-                              '${lamp[2].toString().padLeft(2, '0')} : ${lamp[3].toString().padLeft(2, '0')}'),
+                          try {
+                            await _database
+                                .update({'FISH/LEDONH/': timeOn.hour});
+                            await _database
+                                .update({'FISH/LEDONM/': timeOn.minute});
+                          } catch (e) {
+                            showErrorDialog(context, e.toString());
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.lightGreen,
+                            maximumSize: const Size(90, 40)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: Center(
+                            child: Text(
+                                '${lamp[0].toString().padLeft(2, '0')} : ${lamp[1].toString().padLeft(2, '0')}'),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Text('OFF',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          final newTime = await showTimePicker(
+                            context: context,
+                            initialTime: initialTime,
+                          );
+                          if (newTime == null) {
+                            return;
+                          }
+                          setState(() {
+                            timeOff = newTime;
+                          });
+                          try {
+                            await _database.update({
+                              'FISH/LEDOFFH/': timeOff.hour,
+                            });
+                            await _database
+                                .update({'FISH/LEDOFFM/': timeOff.minute});
+                          } catch (e) {
+                            showErrorDialog(context, e.toString());
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.redAccent,
+                            maximumSize: const Size(90, 40)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: Center(
+                            child: Text(
+                                '${lamp[2].toString().padLeft(2, '0')} : ${lamp[3].toString().padLeft(2, '0')}'),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),

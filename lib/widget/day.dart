@@ -108,9 +108,9 @@ class _DayState extends State<Day> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(0.0),
+                        padding: const EdgeInsets.all(0.0),
                         child: Text(
-                          '${now.difference(date0[0]).inDays + 1}',
+                          '${now.difference(date0[0]).inDays}',
                           style: const TextStyle(
                               fontSize: 60,
                               fontWeight: FontWeight.w600,
